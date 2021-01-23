@@ -1,7 +1,7 @@
-import back1 from './back1.png';
-import back2 from './back2.png';
-import back3 from './back3.png';
+import mountainsImg from './skirt-mountains.jpg';
+import forestImg from './skirt-forest.jpg';
+import submarineImg from './skirt-submarine.png';
 
 export {
-  back1, back2, back3,
+  mountainsImg, forestImg, submarineImg,
 };
