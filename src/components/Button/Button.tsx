@@ -17,6 +17,7 @@ const StyledButton = styled.button`
   text-transform: uppercase;
   background-color: #F65263;
   border: none;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
   &:hover {

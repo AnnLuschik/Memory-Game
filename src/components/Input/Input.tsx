@@ -5,19 +5,24 @@ type IProps = {
   value: string
   onChange: (text: string) => void
   id: string
-  required: boolean
+  error: boolean
 };
 
 export const Input = React.memo(({
-  value, onChange, id, required,
+  value, onChange, id, error,
 }:IProps) => {
   const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   }, [onChange]);
 
-  return <StyledInput value={value} onChange={onChangeHandler} id={id} {...required ? 'required' : null} />;
+  return <StyledInput value={value} onChange={onChangeHandler} id={id} errorStyle={error} />;
 });
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{errorStyle: boolean | undefined}>`
   padding: 5px 10px;
+  margin-bottom: 5px;
+  border: 1px solid;
+  border-radius: 5px;
+  outline: none;
+  ${(props) => (props.errorStyle ? 'border-color: #f70f0f' : 'border-color: #000000')}
 `;
