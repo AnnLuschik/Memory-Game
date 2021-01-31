@@ -5,20 +5,28 @@ type IProps = {
   value: string
   onChange: (text: string) => void
   id: string
-  error: boolean
+  error?: boolean
 };
 
 export const Input = React.memo(({
-  value, onChange, id, error,
+  value, onChange, id, error = false,
 }:IProps) => {
   const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   }, [onChange]);
 
-  return <StyledInput value={value} onChange={onChangeHandler} id={id} errorStyle={error} />;
+  return (
+    <StyledInput
+      value={value}
+      onChange={onChangeHandler}
+      id={id}
+      errorStyle={error}
+    />
+  );
 });
 
-const StyledInput = styled.input<{errorStyle: boolean | undefined}>`
+const StyledInput = styled.input<{errorStyle: boolean}>`
+  min-width: 275px;
   padding: 5px 10px;
   margin-bottom: 5px;
   border: 1px solid;

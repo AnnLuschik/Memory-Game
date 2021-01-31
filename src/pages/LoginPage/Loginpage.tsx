@@ -9,19 +9,78 @@ export function LoginPage() {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [mail, setMail] = useState('');
-  const [validationError, setValidationError] = useState(false);
+  const [nameValidationError, setNameValidationError] = useState({
+    value: false,
+    text: '',
+  });
+  const [surnameValidationError, setSurnameValidationError] = useState({
+    value: false,
+    text: '',
+  });
+  const [mailValidationError, setMailValidationError] = useState({
+    value: false,
+    text: '',
+  });
 
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const validate = useCallback(() => {
+    let isValid = true;
+
+    if (!name) {
+      isValid = false;
+      setNameValidationError({
+        value: true,
+        text: 'This field is required.',
+      });
+    }
+
+    if (name.length > 15) {
+      isValid = false;
+      setNameValidationError({
+        value: true,
+        text: 'The maximum length is 15 characters.',
+      });
+    }
+
+    if (name.length > 0 && name.length <= 15) {
+      isValid = true;
+      setNameValidationError({
+        value: false,
+        text: '',
+      });
+    }
+
+    if (surname.length > 15) {
+      isValid = false;
+      setSurnameValidationError({
+        value: true,
+        text: 'The maximum length is 15 characters.',
+      });
+    } else {
+      setSurnameValidationError({ ...surnameValidationError, value: false });
+    }
+
+    if (mail && !mail.includes('@')) {
+      isValid = false;
+      setMailValidationError({
+        value: true,
+        text: 'Enter the valid email.',
+      });
+    } else {
+      setMailValidationError({ ...mailValidationError, value: false });
+    }
+
+    return isValid;
+  }, [name, surname, mail, surnameValidationError, mailValidationError]);
+
   const loginHandler = useCallback(() => {
-    if (name.length) {
+    if (validate()) {
       dispatch(loginRequest(JSON.stringify({ name, surname, mail })));
       history.push('/');
-    } else {
-      setValidationError(true);
     }
-  }, [dispatch, name, surname, mail, history]);
+  }, [dispatch, history, validate, mail, name, surname]);
 
   return (
     <Container>
@@ -32,16 +91,20 @@ export function LoginPage() {
             First name
             <Asterisk>*</Asterisk>
           </StyledText>
-          <Input value={name} onChange={setName} id="name" error={validationError} />
-          <ErrorText visible={validationError}>This field is required.</ErrorText>
+          <Input value={name} onChange={setName} id="name" error={nameValidationError.value} />
+          <ErrorText visible={nameValidationError.value}>{nameValidationError.text}</ErrorText>
         </StyledLabel>
         <StyledLabel htmlFor="surname">
           <StyledText>Surname</StyledText>
-          <Input value={surname} onChange={setSurname} id="surname" error={false} />
+          <Input value={surname} onChange={setSurname} id="surname" error={surnameValidationError.value} />
+          <ErrorText visible={surnameValidationError.value}>
+            {surnameValidationError.text}
+          </ErrorText>
         </StyledLabel>
         <StyledLabel htmlFor="mail">
           <StyledText>E-mail</StyledText>
-          <Input value={mail} onChange={setMail} id="mail" error={false} />
+          <Input value={mail} onChange={setMail} id="mail" error={mailValidationError.value} />
+          <ErrorText visible={mailValidationError.value}>{mailValidationError.text}</ErrorText>
         </StyledLabel>
         <Button onClick={loginHandler}>Login</Button>
       </StyledForm>
