@@ -13,7 +13,7 @@ const initialState: LoginState = {
   bootstrapped: false,
 };
 
-export function loginReducer(state = initialState, action: AuthorizationActionTypes) {
+export function loginReducer(state = initialState, action: AuthorizationActionTypes):LoginState {
   switch (action.type) {
     case LOGIN_SUCCESS: {
       return {

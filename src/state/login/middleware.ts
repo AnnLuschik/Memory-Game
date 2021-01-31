@@ -1,5 +1,5 @@
 import { Middleware } from 'redux';
-import type { RootState } from '../store';
+import type { RootState } from '../rootReducer';
 import {
   LOGIN_REQUEST, loginSuccess, loginFailure, BOOTSTRAP_START, bootstrapFinish, LOGOUT,
 } from './actions';

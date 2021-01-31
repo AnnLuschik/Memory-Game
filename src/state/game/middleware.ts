@@ -23,7 +23,7 @@ RootState
     const { game: { result, gameParams: { level } } } = store.getState();
 
     const currentResult:IResultItem = {
-      name: `${name} ${surname}`, contacts: mail, time: result, level,
+      name: `${name}${surname ? ` ${surname}` : ''}`, contacts: mail, time: result, level,
     };
 
     let commonResults:ICommonResults = {
