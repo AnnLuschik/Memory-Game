@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button } from '../../components';
+import { LevelInput, SkirtInput } from './components';
+import {
+  logout, selectCardSkirt, selectGamelevel, LevelTypes,
+} from '../../state';
 import recordsImg from '../../assets/cup.png';
-import { back1, back2, back3 } from '../../assets';
+import { mountainsImg, forestImg, submarineImg } from '../../assets';
 
 export function MainPage() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [level, setLevel] = useState<LevelTypes>('low');
+  const [skirt, setSkirt] = useState(mountainsImg);
+
+  const logoutHandler = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
+
+  const startGame = useCallback(() => {
+    history.push('/game/play');
+  }, [history]);
+
+  useEffect(() => {
+    dispatch(selectGamelevel(level));
+  }, [dispatch, level]);
+
+  useEffect(() => {
+    dispatch(selectCardSkirt(skirt));
+  }, [dispatch, skirt]);
+
   return (
     <StyledWrapper>
       <RulesContainer>
@@ -14,29 +41,30 @@ export function MainPage() {
           <li>Select two cards to try match the flag and country name.</li>
           <li>If you match the pictures, the cards disappear.</li>
           <li>If they do not match, the cards turn over.</li>
-          <li>Time is limited.</li>
           <li>Have fun!</li>
         </ol>
       </RulesContainer>
       <SkirtsContainer>
         <StyledTitle>Choose card skirt</StyledTitle>
-        <Box>
-          <StyledSkirt style={{ backgroundImage: `url(${back1})` }} />
-          <StyledSkirt style={{ backgroundImage: `url(${back2})` }} />
-          <StyledSkirt style={{ backgroundImage: `url(${back3})` }} />
-        </Box>
+        <Skirts>
+          <SkirtInput id="mountains" value={mountainsImg} name="skirtInput" onChange={() => setSkirt(mountainsImg)} image={mountainsImg} checked={skirt === mountainsImg} />
+          <SkirtInput id="forest" value={forestImg} name="skirtInput" onChange={() => setSkirt(forestImg)} image={forestImg} checked={skirt === forestImg} />
+          <SkirtInput id="submarine" value={submarineImg} name="skirtInput" onChange={() => setSkirt(submarineImg)} image={submarineImg} checked={skirt === submarineImg} />
+        </Skirts>
       </SkirtsContainer>
       <LevelContainer>
         <StyledTitle>Choose difficulty</StyledTitle>
-        <LevelButton onClick={() => null}>low (5*2)</LevelButton>
-        <LevelButton onClick={() => null}>medium (6*3)</LevelButton>
-        <LevelButton onClick={() => null}>hight (8*3)</LevelButton>
+        <Levels>
+          <LevelInput id="low" value="low" name="levelInput" onChange={() => setLevel('low')} checked={level === 'low'} text="low (5*2)" />
+          <LevelInput id="medium" value="medium" name="levelInput" onChange={() => setLevel('medium')} checked={level === 'medium'} text="medium (6*3)" />
+          <LevelInput id="high" value="high" name="levelInput" onChange={() => setLevel('high')} checked={level === 'high'} text="high (8*3)" />
+        </Levels>
       </LevelContainer>
       <PlayButton>
-        <Button onClick={() => null}>play</Button>
+        <Button onClick={startGame}>play</Button>
       </PlayButton>
       <LogoutButton>
-        <Button onClick={() => null}>logout</Button>
+        <Button onClick={logoutHandler}>logout</Button>
       </LogoutButton>
       <RecordsContainer>
         <StyledLink to="/game/records">
@@ -88,29 +116,25 @@ const SkirtsContainer = styled(StyledContainer)`
   grid-area: skirts;
 `;
 
-const Box = styled.div`
+const Skirts = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;
   width: 100%;
 `;
 
-const StyledSkirt = styled.div`
-  width: 120px;
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-`;
-
-const LevelContainer = styled(StyledContainer)`
+const LevelContainer = styled.div`
+  display: flex;
+  flex-direction: column;   
+  align-items: center;
+  padding: 20px 25px;
   background: #d2d2d2;
-  grid-area: level;
 `;
 
-const LevelButton = styled(Button)`
-  min-width: 45px;
-  text-transform: capitalize;
-  background-color: #cdcdcd;
+const Levels = styled.div`
+  display: flex;
+  flex-direction: column;   
+  align-items: center;
 `;
 
 const PlayButton = styled.div`
