@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -22,6 +22,16 @@ export const ModalWindow = React.memo(({ result }:IProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const onClickBackBtn = useCallback(() => {
+    dispatch(changeGameStatus('non-started'));
+    history.push('/game');
+  }, [dispatch, history]);
+
+  const onClickRecordsBtn = useCallback(() => {
+    dispatch(changeGameStatus('non-started'));
+    history.push('/game/records');
+  }, [dispatch, history]);
+
   return (
     <Fogging>
       <Container>
@@ -32,16 +42,16 @@ export const ModalWindow = React.memo(({ result }:IProps) => {
             <SecondaryTitle>{`TOP 5 of ${level} level:`}</SecondaryTitle>
             <ol>
               {topResults[level].map((item) => (
-                <li>
+                <li key={Math.random()}>
                   <Text>{`${item.name}: ${item.time.min}:${item.time.sec}`}</Text>
                 </li>
               ))}
             </ol>
-            <Button onClick={() => history.push('/game/records')}>show all</Button>
+            <Button onClick={onClickRecordsBtn}>show all</Button>
           </Box>
           <ButtonsContainer>
             <Button onClick={() => dispatch(changeGameStatus('non-started'))}>Restart</Button>
-            <Button onClick={() => history.push('/game')}>Go to main</Button>
+            <Button onClick={onClickBackBtn}>Go to main</Button>
           </ButtonsContainer>
         </Inner>
       </Container>
@@ -63,7 +73,6 @@ const Container = styled.div`
   top: calc(50% - 300px);
   left: calc(50% - 300px);
   width: 600px;
-  height: 600px; 
   background: #ffffff;
   z-index: 10;
 `;
@@ -75,7 +84,7 @@ const Inner = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 40px;
+  padding: 25px 20px;;
 `;
 
 const Title = styled.p`
@@ -101,7 +110,7 @@ const Box = styled.div`
   flex-direction: column;
   align-items: center;
   width: 75%;
-  /* margin: 50px 0; */
+  margin: 20px 0;
   padding: 15px 20px;
   border: 1px solid gray;
 `;
