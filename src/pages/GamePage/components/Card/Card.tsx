@@ -10,11 +10,11 @@ interface IProps {
   isFound: boolean
 }
 
-export function Card({
+export const Card = React.memo(({
   data, skirt, onClick, isFlipped, isFound,
-}: IProps) {
+}: IProps) => {
   const onClickHandler = useCallback(() => {
-    if (!isFlipped || !isFound) {
+    if (!isFlipped && !isFound) {
       onClick(data);
     }
   }, [onClick, data, isFound, isFlipped]);
@@ -27,7 +27,7 @@ export function Card({
       </Inner>
     </Container>
   );
-}
+});
 
 const Container = styled.div<{isFound: boolean}>`
   width: 175px;

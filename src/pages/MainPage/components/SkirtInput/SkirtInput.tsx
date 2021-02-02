@@ -10,16 +10,14 @@ interface IProps {
   image: string
 }
 
-export function SkirtInput({
+export const SkirtInput = React.memo(({
   id, name, value, onChange, checked, image,
-}:IProps) {
-  return (
-    <>
-      <StyledInput type="radio" id={id} name={name} value={value} onChange={onChange} checked={checked} />
-      <StyledLabel htmlFor={id} image={image} />
-    </>
-  );
-}
+}:IProps) => (
+  <>
+    <StyledInput type="radio" id={id} name={name} value={value} onChange={onChange} checked={checked} />
+    <StyledLabel htmlFor={id} image={image} />
+  </>
+));
 
 const StyledLabel = styled.label<{image: string}>`
   width: 175px;

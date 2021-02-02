@@ -11,16 +11,14 @@ interface IProps {
   text: string
 }
 
-export function LevelInput({
+export const LevelInput = React.memo(({
   id, name, value, onChange, checked, text,
-}:IProps) {
-  return (
-    <>
-      <StyledInput type="radio" id={id} name={name} value={value} onChange={onChange} checked={checked} />
-      <StyledLabel htmlFor={id}>{text}</StyledLabel>
-    </>
-  );
-}
+}:IProps) => (
+  <>
+    <StyledInput type="radio" id={id} name={name} value={value} onChange={onChange} checked={checked} />
+    <StyledLabel htmlFor={id}>{text}</StyledLabel>
+  </>
+));
 
 const StyledLabel = styled.label`
   margin-bottom: 10px;
@@ -28,6 +26,7 @@ const StyledLabel = styled.label`
   min-width: 125px;
   color: #ffffff;
   background: #F65263;
+  border-radius: 5px;
   text-transform: capitalize;
   cursor: pointer;
 `;
