@@ -38,10 +38,10 @@ export function MainPage() {
       <RulesContainer>
         <StyledTitle>Rules</StyledTitle>
         <ol>
-          <li>Select two cards to try match the flag and country name.</li>
-          <li>If you match the pictures, the cards disappear.</li>
-          <li>If they do not match, the cards turn over.</li>
-          <li>Have fun!</li>
+          <ListItem>Select two cards to try match the flag and country name.</ListItem>
+          <ListItem>If you match the pictures, the cards disappear.</ListItem>
+          <ListItem>If they do not match, the cards turn over.</ListItem>
+          <ListItem>Have fun!</ListItem>
         </ol>
       </RulesContainer>
       <SkirtsContainer>
@@ -60,12 +60,12 @@ export function MainPage() {
           <LevelInput id="high" value="high" name="levelInput" onChange={() => setLevel('high')} checked={level === 'high'} text="high (8*3)" />
         </Levels>
       </LevelContainer>
-      <PlayButton>
+      <PlayButtonBox>
         <Button onClick={startGame}>play</Button>
-      </PlayButton>
-      <LogoutButton>
+      </PlayButtonBox>
+      <LogoutButtonBox>
         <Button onClick={logoutHandler}>logout</Button>
-      </LogoutButton>
+      </LogoutButtonBox>
       <RecordsContainer>
         <StyledLink to="/game/records">
           <StyledRecordsBox>
@@ -99,20 +99,25 @@ const StyledTitle = styled.h3`
   color: #000000;
 `;
 
+const ListItem = styled.li`
+  margin-bottom: 5px;
+  font-size: 18px;
+`;
+
 const StyledContainer = styled.div`
   padding: 20px 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #ebe9e9;
+  box-shadow: 0 0 15px #ebe9e9;
 `;
 
 const RulesContainer = styled(StyledContainer)`
-  background: yellowgreen;
   grid-area: rules;
 `;
 
 const SkirtsContainer = styled(StyledContainer)`
-  background: olivedrab;
   grid-area: skirts;
 `;
 
@@ -123,12 +128,8 @@ const Skirts = styled.div`
   width: 100%;
 `;
 
-const LevelContainer = styled.div`
-  display: flex;
-  flex-direction: column;   
-  align-items: center;
-  padding: 20px 25px;
-  background: #d2d2d2;
+const LevelContainer = styled(StyledContainer)`
+  grid-area: level;
 `;
 
 const Levels = styled.div`
@@ -137,14 +138,14 @@ const Levels = styled.div`
   align-items: center;
 `;
 
-const PlayButton = styled.div`
+const PlayButtonBox = styled.div`
   grid-area: play;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const LogoutButton = styled.div`
+const LogoutButtonBox = styled.div`
   grid-area: logout;
   display: flex;
   justify-content: center;
@@ -176,4 +177,7 @@ const StyledRecordsBox = styled.div`
 const StyledImage = styled.img`
   width: 100px;
   height: 100px;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
