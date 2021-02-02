@@ -1,49 +1,65 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Button } from '../../components';
-import { RootState } from '../../state';
+import { RootState, setTopResults, ResultTime } from '../../state';
+
+function formatTime(time: ResultTime) {
+  const { min, sec } = time;
+  return `${min < 10 ? `0${min}` : min}:${sec < 10 ? `0${sec}` : sec}`;
+}
 
 export function RecordsPage() {
   const history = useHistory();
-  const { topResults } = useSelector((state:RootState) => state.game);
+  const dispatch = useDispatch();
+  const { topResults: { low, medium, high } } = useSelector((state:RootState) => state.game);
+
+  useEffect(() => {
+    if (!low.length && !medium.length && !high.length) {
+      const results = localStorage.getItem('results');
+      if (results) {
+        dispatch(setTopResults(JSON.parse(results)));
+      }
+    }
+  }, [dispatch, low, medium, high]);
+
   return (
     <Container>
       <Title>Best results</Title>
       <Results>
         <Box>
           <SecondaryTitle>Low level</SecondaryTitle>
-          <ol>
-            {topResults.low.map((item) => (
-              <li>
-                <Text>{`${item.name}: ${item.time.min}:${item.time.sec}`}</Text>
-              </li>
+          <StyledList>
+            {low.map((item) => (
+              <ListItem key={item.name + Math.random()}>
+                {`${item.name} ${formatTime(item.time)}`}
+              </ListItem>
             ))}
-          </ol>
+          </StyledList>
         </Box>
         <Box>
           <SecondaryTitle>Medium level</SecondaryTitle>
-          <ol>
-            {topResults.medium.map((item) => (
-              <li>
-                <Text>{`${item.name}: ${item.time.min}:${item.time.sec}`}</Text>
-              </li>
+          <StyledList>
+            {medium.map((item) => (
+              <ListItem key={item.name + Math.random()}>
+                {`${item.name} ${formatTime(item.time)}`}
+              </ListItem>
             ))}
-          </ol>
+          </StyledList>
         </Box>
         <Box>
           <SecondaryTitle>High level</SecondaryTitle>
-          <ol>
-            {topResults.high.map((item) => (
-              <li>
-                <Text>{`${item.name}: ${item.time.min}:${item.time.sec}`}</Text>
-              </li>
+          <StyledList>
+            {high.map((item) => (
+              <ListItem key={item.name + Math.random()}>
+                {`${item.name} ${formatTime(item.time)}`}
+              </ListItem>
             ))}
-          </ol>
+          </StyledList>
         </Box>
       </Results>
-      <Button onClick={() => history.push('/game')}>Back</Button>
+      <Button onClick={() => history.push('/game')}>Main</Button>
     </Container>
   );
 }
@@ -52,7 +68,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 800px;
   padding: 25px;
   background: #ffffff;
 `;
@@ -66,7 +81,7 @@ const Title = styled.p`
 
 const Results = styled.div`
   display: flex;
-  justify-content: space-between;
+  row-gap: 10px;
   width: 100%;
 `;
 
@@ -74,7 +89,8 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 200px;
+  min-width: 300px;
+  min-height: 200px;
   margin-bottom: 25px;
   padding: 10px;
   border: 1px solid gray;
@@ -83,21 +99,15 @@ const Box = styled.div`
 const SecondaryTitle = styled(Title)`
   position: relative;
   font-size: 20px;
-  /* &::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 50px;
-    height: 1px;
-    border: none;
-    border-bottom: 1px solid #000000;
-  } */
 `;
 
-const Text = styled.p`
-  margin-bottom: 20px;
+const StyledList = styled.ol`
+  list-style-position: inside;
+`;
+
+const ListItem = styled.li`
+  margin-bottom: 10px;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 18px;
   color: #000000;
 `;
