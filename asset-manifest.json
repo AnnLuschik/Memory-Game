@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/Memory-Game/static/css/main.98121505.chunk.css",
-    "main.js": "/Memory-Game/static/js/main.7e90c38f.chunk.js",
-    "main.js.map": "/Memory-Game/static/js/main.7e90c38f.chunk.js.map",
+    "main.js": "/Memory-Game/static/js/main.73bc833a.chunk.js",
+    "main.js.map": "/Memory-Game/static/js/main.73bc833a.chunk.js.map",
     "runtime-main.js": "/Memory-Game/static/js/runtime-main.9be909e2.js",
     "runtime-main.js.map": "/Memory-Game/static/js/runtime-main.9be909e2.js.map",
-    "static/js/2.4d993d89.chunk.js": "/Memory-Game/static/js/2.4d993d89.chunk.js",
-    "static/js/2.4d993d89.chunk.js.map": "/Memory-Game/static/js/2.4d993d89.chunk.js.map",
+    "static/js/2.786b89e3.chunk.js": "/Memory-Game/static/js/2.786b89e3.chunk.js",
+    "static/js/2.786b89e3.chunk.js.map": "/Memory-Game/static/js/2.786b89e3.chunk.js.map",
     "index.html": "/Memory-Game/index.html",
     "static/css/main.98121505.chunk.css.map": "/Memory-Game/static/css/main.98121505.chunk.css.map",
-    "static/js/2.4d993d89.chunk.js.LICENSE.txt": "/Memory-Game/static/js/2.4d993d89.chunk.js.LICENSE.txt",
+    "static/js/2.786b89e3.chunk.js.LICENSE.txt": "/Memory-Game/static/js/2.786b89e3.chunk.js.LICENSE.txt",
+    "static/media/astronaut.1c0a9870.png": "/Memory-Game/static/media/astronaut.1c0a9870.png",
     "static/media/cup.2cabbe88.png": "/Memory-Game/static/media/cup.2cabbe88.png",
     "static/media/flag-afghanistan.6cb31312.png": "/Memory-Game/static/media/flag-afghanistan.6cb31312.png",
     "static/media/flag-albania.d1ab03fd.png": "/Memory-Game/static/media/flag-albania.d1ab03fd.png",
@@ -40,8 +41,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.9be909e2.js",
-    "static/js/2.4d993d89.chunk.js",
+    "static/js/2.786b89e3.chunk.js",
     "static/css/main.98121505.chunk.css",
-    "static/js/main.7e90c38f.chunk.js"
+    "static/js/main.73bc833a.chunk.js"
   ]
 }
