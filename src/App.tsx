@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  LoginPage, MainPage, GamePage, RecordsPage,
+  LoginPage, MainPage, GamePage, RecordsPage, NotFoundPage,
 } from './pages';
 import { RootState, bootstrapStart } from './state';
 
@@ -14,7 +14,7 @@ const PublicRoute = () => (
     <Route exact path="/game" component={MainPage} />
     <Route exact path="/game/play" component={GamePage} />
     <Route exact path="/game/records" component={RecordsPage} />
-    <Route exact path="/not-found" />
+    <Route exact path="/not-found" component={NotFoundPage} />
     <Redirect to="/not-found" />
   </Switch>
 );
