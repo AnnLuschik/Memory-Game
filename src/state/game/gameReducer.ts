@@ -1,5 +1,5 @@
 import {
-  SELECT_CARD_SKIRT, SELECT_GAME_LEVEL, CHANGE_GAME_STATUS,
+  SELECT_CARD_BACK, SELECT_GAME_LEVEL, CHANGE_GAME_STATUS,
   SET_GAME_RESULT, SET_TOP_RESULTS, GameActionTypes,
 } from './actions';
 import {
@@ -7,7 +7,7 @@ import {
 } from './types';
 
 type GameParams = {
-  skirt: string
+  back: string
   level: LevelTypes
   cardsNumber: Levels
 };
@@ -21,7 +21,7 @@ interface GameState {
 
 const initialState: GameState = {
   gameParams: {
-    skirt: '',
+    back: '',
     level: 'low',
     cardsNumber: Levels.low,
   },
@@ -38,12 +38,12 @@ const initialState: GameState = {
 
 export function gameReducer(state = initialState, action: GameActionTypes):GameState {
   switch (action.type) {
-    case SELECT_CARD_SKIRT: {
+    case SELECT_CARD_BACK: {
       return {
         ...state,
         gameParams: {
           ...state.gameParams,
-          skirt: action.payload,
+          back: action.payload,
         },
       };
     }

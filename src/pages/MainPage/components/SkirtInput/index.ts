@@ -1,1 +1,0 @@
-export { SkirtInput } from './SkirtInput';

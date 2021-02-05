@@ -1,2 +1,2 @@
 export { LevelInput } from './LevelInput';
-export { SkirtInput } from './SkirtInput';
+export { BackInput } from './BackInput';

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Button } from '../../components';
-import { LevelInput, SkirtInput } from './components';
+import { LevelInput, BackInput } from './components';
 import {
-  logout, selectCardSkirt, selectGamelevel, LevelTypes,
+  logout, selectCardBack, selectGamelevel, LevelTypes,
 } from '../../state';
 import recordsImg from '../../assets/cup.png';
 import { mountainsImg, forestImg, submarineImg } from '../../assets';
@@ -15,7 +15,7 @@ export function MainPage() {
   const history = useHistory();
 
   const [level, setLevel] = useState<LevelTypes>('low');
-  const [skirt, setSkirt] = useState(mountainsImg);
+  const [cardBack, setCardBack] = useState(mountainsImg);
 
   const logoutHandler = useCallback(() => {
     dispatch(logout());
@@ -30,8 +30,8 @@ export function MainPage() {
   }, [dispatch, level]);
 
   useEffect(() => {
-    dispatch(selectCardSkirt(skirt));
-  }, [dispatch, skirt]);
+    dispatch(selectCardBack(cardBack));
+  }, [dispatch, cardBack]);
 
   return (
     <StyledWrapper>
@@ -44,14 +44,14 @@ export function MainPage() {
           <ListItem>Have fun!</ListItem>
         </ol>
       </RulesContainer>
-      <SkirtsContainer>
-        <StyledTitle>Choose card skirt</StyledTitle>
-        <Skirts>
-          <SkirtInput id="mountains" value={mountainsImg} name="skirtInput" onChange={() => setSkirt(mountainsImg)} image={mountainsImg} checked={skirt === mountainsImg} />
-          <SkirtInput id="forest" value={forestImg} name="skirtInput" onChange={() => setSkirt(forestImg)} image={forestImg} checked={skirt === forestImg} />
-          <SkirtInput id="submarine" value={submarineImg} name="skirtInput" onChange={() => setSkirt(submarineImg)} image={submarineImg} checked={skirt === submarineImg} />
-        </Skirts>
-      </SkirtsContainer>
+      <BacksContainer>
+        <StyledTitle>Choose card back</StyledTitle>
+        <Backs>
+          <BackInput id="mountains" value={mountainsImg} name="backInput" onChange={() => setCardBack(mountainsImg)} image={mountainsImg} checked={cardBack === mountainsImg} />
+          <BackInput id="forest" value={forestImg} name="backInput" onChange={() => setCardBack(forestImg)} image={forestImg} checked={cardBack === forestImg} />
+          <BackInput id="submarine" value={submarineImg} name="backInput" onChange={() => setCardBack(submarineImg)} image={submarineImg} checked={cardBack === submarineImg} />
+        </Backs>
+      </BacksContainer>
       <LevelContainer>
         <StyledTitle>Choose difficulty</StyledTitle>
         <Levels>
@@ -86,7 +86,7 @@ const StyledWrapper = styled.div`
   grid-template-areas:
     "rules rules rules logout"
     "rules rules rules records"
-    "level skirts skirts play";
+    "level backs backs play";
   row-gap: 15px;
   column-gap: 15px;
   background: #ffffff;
@@ -117,11 +117,11 @@ const RulesContainer = styled(StyledContainer)`
   grid-area: rules;
 `;
 
-const SkirtsContainer = styled(StyledContainer)`
-  grid-area: skirts;
+const BacksContainer = styled(StyledContainer)`
+  grid-area: backs;
 `;
 
-const Skirts = styled.div`
+const Backs = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 20px;

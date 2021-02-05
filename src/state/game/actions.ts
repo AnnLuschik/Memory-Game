@@ -2,7 +2,7 @@ import {
   LevelTypes, ResultTime, StatusTypes, ICommonResults,
 } from './types';
 
-export const SELECT_CARD_SKIRT = 'SELECT_CARD_SKIRT';
+export const SELECT_CARD_BACK = 'SELECT_CARD_BACK';
 export const SELECT_GAME_LEVEL = 'SELECT_GAME_LEVEL';
 
 export const CHANGE_GAME_STATUS = 'CHANGE_GAME_STATUS';
@@ -10,8 +10,8 @@ export const CHANGE_GAME_STATUS = 'CHANGE_GAME_STATUS';
 export const SET_GAME_RESULT = 'SET_GAME_RESULT';
 export const SET_TOP_RESULTS = 'SET_TOP_RESULTS';
 
-interface SelectCardSkirtAction {
-  type: typeof SELECT_CARD_SKIRT
+interface SelectCardBackAction {
+  type: typeof SELECT_CARD_BACK
   payload: string
 }
 
@@ -35,15 +35,15 @@ interface SetTopResultsAction {
   payload: ICommonResults
 }
 
-export type GameActionTypes = SelectCardSkirtAction
+export type GameActionTypes = SelectCardBackAction
 | SelectGameLevelAction
 | ChangeGameStatusAction
 | SetGameResultAction
 | SetTopResultsAction;
 
-export function selectCardSkirt(data: string): SelectCardSkirtAction {
+export function selectCardBack(data: string): SelectCardBackAction {
   return {
-    type: SELECT_CARD_SKIRT,
+    type: SELECT_CARD_BACK,
     payload: data,
   };
 }

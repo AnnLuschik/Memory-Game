@@ -10,7 +10,7 @@ interface IProps {
   image: string
 }
 
-export const SkirtInput = React.memo(({
+export const BackInput = React.memo(({
   id, name, value, onChange, checked, image,
 }:IProps) => (
   <>
