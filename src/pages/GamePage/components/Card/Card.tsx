@@ -4,14 +4,14 @@ import { IImage } from '../../../../assets';
 
 interface IProps {
   data: IImage
-  skirt: string
+  back: string
   onClick: (arg: IImage) => void
   isFlipped: boolean
   isFound: boolean
 }
 
 export const Card = React.memo(({
-  data, skirt, onClick, isFlipped, isFound,
+  data, back, onClick, isFlipped, isFound,
 }: IProps) => {
   const onClickHandler = useCallback(() => {
     if (!isFlipped && !isFound) {
@@ -22,7 +22,7 @@ export const Card = React.memo(({
   return (
     <Container onClick={onClickHandler} isFound={isFound}>
       <Inner isFlipped={isFlipped}>
-        <Front bcg={skirt} />
+        <Front bcg={back} />
         <Back bcg={data.path} />
       </Inner>
     </Container>

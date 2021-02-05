@@ -34,7 +34,7 @@ export function GamePage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const {
-    gameParams: { cardsNumber, level, skirt }, status, result,
+    gameParams: { cardsNumber, level, back }, status, result,
   } = useSelector((store: RootState) => store.game);
 
   const [cardsArray, setCardsArray] = useState<Images>([]);
@@ -125,7 +125,7 @@ export function GamePage() {
             <Card
               key={value.path}
               data={value}
-              skirt={skirt}
+              back={back}
               onClick={(data) => onClickCard(data)}
               isFlipped={selected.indexOf(value) !== -1}
               isFound={founded.indexOf(value.key) !== -1}
