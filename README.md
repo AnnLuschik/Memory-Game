@@ -9,4 +9,4 @@ The distribution of cards is always random (there are 50 different countries in 
 
 There is a custom 404 page, where user will be redirected in case of invalid URL.
 
-USED: React, React Router, Typescript, Redux, Styled Components. 
+USED: React, React Router, Typescript, Redux, Styled Components, Eslint. 
